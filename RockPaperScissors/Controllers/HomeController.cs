@@ -8,34 +8,18 @@ namespace RockPaperScissorsApp.Controllers
     public class HomeController : Controller
     {
 
-        // [HttpGet("/items")]
-        // public ActionResult Index()
-        // {
-        //   // return new EmptyResult();
-        //   List<Item> allItems = Item.GetAll();
-        //   // return View();
-        //   // return new EmptyResult();
-        //   return View(allItems);
-        // }
-        //
-        // [HttpGet("/items/new")]
-        // public ActionResult CreateForm()
-        // {
-        //     return View();
-        // }
-        // [HttpPost("/items")]
-        // public ActionResult Create()
-        // {
-        //   Item newItem = new Item (Request.Form["new-item"]);
-        //   newItem.Save();
-        //   List<Item> allItems = Item.GetAll();
-        //   return View("Index", allItems);
-        // }
-        // [HttpPost("/items/delete")]
-        // public ActionResult DeleteAll()
-        // {
-        //     Item.ClearAll();
-        //     return View();
-        // }
+        [HttpGet("/")]
+        public ActionResult Index()
+        {
+          return View();
+        }
+
+        [HttpPost("/Submit")]
+        public ActionResult Submit()
+        {
+          RockPaperScissors newRockPaperScissors = new RockPaperScissors ((Request.Form["player-one-answer"]), (Request.Form["player-two-answer"]), "");
+          string WinStatement = newRockPaperScissors.GetWinner((Request.Form["player-one-answer"]), (Request.Form["player-two-answer"]));
+          return View("Index", newRockPaperScissors);
+        }
     }
 }
